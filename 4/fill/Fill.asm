@@ -9,3 +9,75 @@
 // the screen should be cleared.
 
 //// Replace this comment with your code.
+
+// black code
+@color:black
+M=-1
+
+// white code
+@color:white
+M=0
+
+@8192
+D=A
+@SCREEN
+D=D+A
+@loop:num
+M=D
+
+(BEGIN)
+@KBD
+D=M
+@WHITE
+D;JEQ
+
+// set black code
+@color:black
+D=M
+@R0
+M=D
+
+@COLORFIN
+0;JMP
+
+// set white code
+(WHITE)
+@color:white
+D=M
+@R0
+M=D
+
+(COLORFIN)
+@SCREEN
+D=A
+@i
+M=D
+
+(LOOP)
+// if (i==loop:num) goto LOOPEND
+@i
+D=M
+@loop:num
+D=M-D
+@LOOPEND
+D;JEQ
+
+@R0
+D=M
+@i
+A=M
+M=D
+
+
+// i = i + 1
+@i
+M=M+1
+
+// goto LOOP
+@LOOP
+0;JMP
+
+(LOOPEND)
+
+@BEGIN
+0;JMP
